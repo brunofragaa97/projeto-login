@@ -7,7 +7,6 @@
 }
 
 .main-container{
-  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,6 +14,10 @@
   height: 500px;
   border: solid 2px red;
   border-radius: 10px;
+  transition: box-shadow 2s ease;
+}
+.main-container:hover {
+  box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0.6); /* Efeito de luz expandindo */
 }
 .animation-gif{
   background-image: url('assets/background-login.gif');
@@ -25,6 +28,42 @@
   align-items: center;
   justify-content: center;
 }
-.main-container:hover {
-  box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0.6); /* Efeito de luz expandindo */
+
+.container-login{
+  background-color: transparent;
+  width: 200px;
+  height: 300px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border: solid 2px red;
+  border-radius: 10px;
+  transition: box-shadow 1s ease-in;
+}
+.container-login:hover {
+  box-shadow: 0 0 40px 20px rgba(255, 0, 0, 0.6); /* Efeito de luz expandindo */
+}
+.container-login-caixa{
+  justify-content: center;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  border: solid 2px red;
+  border-radius: 10px;
+  gap:20px;
+  
+}
+#button-login{
+  margin-top: 30px;
+  background-color: transparent;
+  border: solid 2px red;
+  border-radius: 10px;  
+}
+@media (max-width:390px){
+  .main-container{
+    width: 390px;
+    height: 580px;
+    border: solid 2px aqua;
+  }
 }
