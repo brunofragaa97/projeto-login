@@ -1,0 +1,7 @@
+@media (max-width:390px) {
+    .main-container {
+        width: 390px;
+        height: 580px;
+        border: solid 2px yellowgreen;    
+    }
+}

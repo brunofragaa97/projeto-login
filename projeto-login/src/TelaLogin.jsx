@@ -1,31 +1,40 @@
 import { useState } from 'react'
 
-import './telaLogin.css'
+import './Styles/desktop/TelaLogin.css'
+import './Styles/mobile/TelaLogin.css'
 
 function TelaLogin() {
   const [count, setCount] = useState(0)
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorLogin, setErrorLogin] = useState("")
 
   const loginClick = async (event) => {
     event.preventDefault();
+    if (password.length < 6){
+      return setErrorLogin("Senha não pode conter menos que 6 caracteres")
+    }
+    else {
+      try {
+        const response = await fetch('http://localhost:5000/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+        });
 
-    try {
-      const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const servidor = await response.json();
-      if (response.ok) {
-        console.log(` ${servidor.message} / ${servidor.user} / ${servidor.token} /`);
-      } else {
-        console.log(`Erro ao logar!!! Mensagem do servidor: ${servidor.message}`)
+        const servidor = await response.json();
+        if (response.ok) {
+          console.log(` ${servidor.message} / ${servidor.user} / ${servidor.token} /`);
+          setErrorLogin(servidor.message)
+        } else {
+          console.log(`Erro ao logar!!! Mensagem do servidor: ${servidor.message}`)
+          setErrorLogin(servidor.message)
+        }
+      } catch (error) {
+        console.log("Erro ao conectar no servidor")
+        setErrorLogin("Servidor indisponivel")
       }
-    } catch (error) {
-      console.log("Erro ao conectar no servidor")
     }
   }
 
@@ -40,12 +49,12 @@ function TelaLogin() {
               <form onSubmit={loginClick}>
                 <div>
                   <label for="username">Usuario</label>
-                  <input 
-                  type='text' 
-                  value={username} 
-                  id="username" 
-                  name='username' 
-                  onChange={(e) => setUsername(e.target.value)}required></input>
+                  <input
+                    type='text'
+                    value={username}
+                    id="username"
+                    name='username'
+                    onChange={(e) => setUsername(e.target.value)} required></input>
                 </div>
                 <div>
                   <label for="userpassword">Senha</label>
@@ -54,12 +63,15 @@ function TelaLogin() {
                     value={password}
                     id='userpassword'
                     name='userpassword'
-                    onChange={(e) => setPassword(e.target.value)}required></input>
+                    onChange={(e) => setPassword(e.target.value)} required></input>
                 </div>
                 <div>
                   <button type="submit" id='button-login'>ENTRAR</button>
                 </div>
               </form>
+              <div>
+                <p className='error-message'>{errorLogin}</p>
+              </div>
             </div>
           </div>
         </div>

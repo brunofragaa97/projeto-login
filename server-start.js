@@ -23,7 +23,7 @@ const users = [
   {
     id: 1,
     username: 'admin', // Nome de usuário
-    password: bcrypt.hashSync('1234', 8), // Senha '1234' criptografada
+    password: bcrypt.hashSync('123456', 8), // Senha '1234' criptografada
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ app.post('/api/login', (req, res) => {
 
   const user = users.find((u) => u.username === username);
   if (!user) {
-    return res.status(404).json({ message: 'Usuário não encontrado' }); // Retorna erro caso não exista
+    return res.status(404).json({ message: 'Usuário não Cadastrado' }); // Retorna erro caso não exista
   }
 
   // Verifica se a senha fornecida corresponde à senha criptografada armazenada

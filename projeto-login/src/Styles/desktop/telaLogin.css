@@ -13,14 +13,11 @@
   width: 1200px;
   height: 500px;
   border: solid 2px red;
-  border-radius: 10px;
-  transition: box-shadow 2s ease;
-}
-.main-container:hover {
-  box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0.6); /* Efeito de luz expandindo */
+  border-radius: 20px;
+  
 }
 .animation-gif{
-  background-image: url('assets/background-login.gif');
+  background-image: url('/src/assets/background-login.gif');
   background-size: 1200px 500px;
   width: 100%;
   height: 100%;
@@ -39,10 +36,10 @@
   justify-content: center;
   border: solid 2px red;
   border-radius: 10px;
-  transition: box-shadow 1s ease-in;
+  transition: box-shadow 3s ease-in;
 }
 .container-login:hover {
-  box-shadow: 0 0 40px 20px rgba(255, 0, 0, 0.6); /* Efeito de luz expandindo */
+  box-shadow: 0 0 59px 40px rgb(163, 7, 137); /* Efeito de luz expandindo */
 }
 .container-login-caixa{
   justify-content: center;
@@ -60,10 +57,8 @@
   border: solid 2px red;
   border-radius: 10px;  
 }
-@media (max-width:390px){
-  .main-container{
-    width: 390px;
-    height: 580px;
-    border: solid 2px aqua;
-  }
+.error-message{
+  color: yellow;
+  font-size: 10px;
 }
+
