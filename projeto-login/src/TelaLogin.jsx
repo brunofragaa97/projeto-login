@@ -12,17 +12,17 @@ function TelaLogin() {
     event.preventDefault();
 
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('http://localhost:5000/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
       });
 
-      const data = await response.json();
+      const servidor = await response.json();
       if (response.ok) {
-        console.log("login bem sucessido, parabens!!!Seja bem vindo ${data.user}");
+        console.log(` ${servidor.message} / ${servidor.user} / ${servidor.token} /`);
       } else {
-        console.log("Erro ao logar!!! Mensagem do servidor: ${data.message}")
+        console.log(`Erro ao logar!!! Mensagem do servidor: ${servidor.message}`)
       }
     } catch (error) {
       console.log("Erro ao conectar no servidor")
