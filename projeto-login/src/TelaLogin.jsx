@@ -1,18 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import './Styles/desktop/TelaLogin.css'
 import './Styles/mobile/TelaLogin.css'
+import { useNavigate } from "react-router-dom";
+
 
 function TelaLogin() {
-  const [count, setCount] = useState(0)
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorLogin, setErrorLogin] = useState("")
 
+const navigate = useNavigate();
+
+
   const loginClick = async (event) => {
     event.preventDefault();
-    if (password.length < 6){
+    if (password.length < 6) {
       return setErrorLogin("Senha não pode conter menos que 6 caracteres")
     }
     else {
@@ -27,6 +30,9 @@ function TelaLogin() {
         if (response.ok) {
           console.log(` ${servidor.message} / ${servidor.user} / ${servidor.token} /`);
           setErrorLogin(servidor.message)
+          navigate("/dashboard-principal");
+          
+         
         } else {
           console.log(`Erro ao logar!!! Mensagem do servidor: ${servidor.message}`)
           setErrorLogin(servidor.message)
@@ -48,7 +54,7 @@ function TelaLogin() {
               <div><h1>LOGUE-SE</h1></div>
               <form onSubmit={loginClick}>
                 <div>
-                  <label for="username">Usuario</label>
+                  <label htmlFor="username">Usuario</label>
                   <input
                     type='text'
                     value={username}
@@ -57,7 +63,7 @@ function TelaLogin() {
                     onChange={(e) => setUsername(e.target.value)} required></input>
                 </div>
                 <div>
-                  <label for="userpassword">Senha</label>
+                  <label htmlFor="userpassword">Senha</label>
                   <input
                     type='password'
                     value={password}
@@ -79,5 +85,6 @@ function TelaLogin() {
     </>
   )
 }
+
 
 export default TelaLogin
