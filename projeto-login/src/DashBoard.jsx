@@ -4,24 +4,23 @@ import './Styles/desktop/dashbord.css'
 
 function DashBoard() {
   const navigate = useNavigate();
-  const usuarioLogado = localStorage.getItem('usuarioLogado')
-  const [username, setUsername] = useState(usuarioLogado)
+  const [usuarioLogado, setUsuarioLogado] = useState(localStorage.getItem('usuarioLogado'))  
+  const [userName, setUserName] = useState("")
+ 
 
   useEffect(() => {
-    const testandoServidor = async () => {
-      if (!username) {
-        console.log("nome de usuario não definido")
-      } else {
-        console.log (`enviando corretamento o user '${username}' ao servidor`)
+    const serverConection = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/api/validar-usuario?username=${username}`, {
+          const response = await fetch(`http://localhost:5000/api/validar-usuario?username=${usuarioLogado}`, {
             method: 'GET',
 
           });
 
           const servidor = await response.json();
           if (response.ok) {
-            console.log(servidor.message)
+            console.log(servidor.message ," / " , {usuarioLogado})
+            setUserName(servidor.primeiroNome)
+            console.log(userName)
           }
 
 
@@ -30,9 +29,8 @@ function DashBoard() {
           console.log("Erro ao conectar no servidor ERRO CAIU NO CATCH")
           navigate('/')
         }
-      }
     };
-    testandoServidor()
+    serverConection()
   }, [])
 
 
@@ -41,7 +39,7 @@ function DashBoard() {
   return (
     <div>
       <div className="main-container-dashboard">
-        <div className="span1-container">Seja bem vindo Bruno</div>
+        <div className="span1-container">Seja bem vindo, de volta Sr: {userName}</div>
 
         <div className="span2-container">O que você deseja fazer hoje?
         </div>

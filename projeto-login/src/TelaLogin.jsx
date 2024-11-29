@@ -32,7 +32,7 @@ function TelaLogin() {
           setErrorLogin(servidor.message)
           localStorage.setItem('authToken', servidor.token);
           localStorage.setItem('usuarioLogado', username);
-          navigate(`/dashboard-principal?loginauth-${servidor.token}`);
+          navigate(`/dashboard-principal`)
         
 
 

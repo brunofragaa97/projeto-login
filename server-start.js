@@ -57,33 +57,10 @@ app.post('/api/login', (req, res) => {
 
 
 
-// Endpoint para obter informações do usuário com o token
-app.get('/api/user-info', (req, res) => {
-  const token = req.headers['authorization'];
-  if (!token) {
-    return res.status(403).json({ message: 'Token não fornecido' });
-  }
 
-  try {
-    const decoded = jwt.verify(token, SECRET_KEY);
-    const user = users.find((u) => u.id === decoded.id);
-    if (!user) {
-      return res.status(404).json({ message: 'Usuário não encontrado' });
-    }
-
-    res.json({
-      primeiroNome: user.primeiroNome,
-      segundoNome: user.segundoNome,
-      username: user.username,
-    });
-  } catch (error) {
-    return res.status(401).json({ message: 'Token inválido ou expirado' });
-  }
-});
 // Endpoint para validar se o usuário logado é o mesmo que o do dashboard
 app.get('/api/validar-usuario', (req, res) => {
   const { username } = req.query; // Recebe o 'username' via query string da URL
-  console.log('username recebido:', username);
 
   // Verifica se o 'username' foi fornecido na URL
   if (!username) {
@@ -95,7 +72,10 @@ app.get('/api/validar-usuario', (req, res) => {
 
   // Verifica se o usuário foi encontrado
   if (user) {
-    return res.json({ message: 'sim, o usuario foi encontrado corretamente' }); // Se o usuário for encontrado, responde com "sim"
+    userNome = users['primeiroNome']
+    return res.json({ message: 'sim, o usuario foi encontrado corretamente' , 
+                      primeiroNome: user.primeiroNome
+    }); // Se o usuário for encontrado, responde com "sim"
   } else {
     return res.json({ message: 'não' }); // Se o usuário não for encontrado, responde com "não"
   }
