@@ -1,0 +1,73 @@
+Passo a Passo - Implementação de Autenticação com JWT no Frontend e Backend
+1. Backend (Servidor)
+Criar um endpoint para Login (POST):
+
+Receber o username e password no corpo da requisição.
+Verificar se o usuário existe e se a senha está correta.
+Gerar um token JWT após a validação.
+Enviar o token JWT de volta para o frontend.
+Criar um endpoint para obter as informações do usuário (GET):
+
+Receber o token JWT no cabeçalho Authorization.
+Validar o token usando uma chave secreta.
+Se o token for válido, retornar as informações do usuário (como primeiroNome, segundoNome, etc.).
+Caso o token não seja válido, retornar um erro.
+
+-------------------------------------------------------------------------------------------------------
+2. Frontend (React)
+Componente de Login:
+
+-> Criar um formulário de login com campos para username e password.
+-> Ao submeter o formulário, enviar uma requisição POST para o servidor com os dados de login (username e password).
+-> Se o login for bem-sucedido, o servidor retornará um token JWT, que deve ser armazenado no localStorage do navegador.
+-> Armazenar o Token no localStorage:
+
+-> Quando o login for bem-sucedido, salvar o token JWT no localStorage do navegador para poder usá-lo em futuras requisições.
+-> Redirecionar para o Dashboard:
+
+-> Após o login bem-sucedido e o armazenamento do token, redirecionar o usuário para o Dashboard.
+
+Parei aqui
+3. Componente do Dashboard:
+                    Verificar se o Token está no localStorage:
+-> Quando o usuário acessar o Dashboard, verificar se o token JWT está armazenado no localStorage.
+-> Se não houver token, redirecionar para a tela de login.
+
+                    Enviar uma requisição GET para obter os dados do usuário:
+
+-> Usar o token JWT armazenado no localStorage para fazer uma requisição GET para o servidor com o token no cabeçalho Authorization.
+-> A requisição deve retornar as informações do usuário, como primeiroNome e segundoNome.
+
+                    Exibir as Informações do Usuário no Dashboard:
+-> Após a resposta da requisição, mostrar as informações do usuário (nome, etc.) no Dashboard.
+
+                    Lidar com Erros de Autenticação:
+-> Se o token for inválido ou expirado, redirecionar o usuário para a tela de login.
+
+
+4. Fluxo de Navegação
+Tela de Login:
+O usuário entra com seu username e password.
+Ao enviar o formulário, faz a requisição ao servidor para validar as credenciais.
+Se o login for bem-sucedido, armazene o token no localStorage e redirecione para o Dashboard.
+Dashboard:
+Ao acessar, verifique se o token está presente no localStorage.
+Se o token não existir ou estiver expirado, redirecione para o login.
+Se o token for válido, faça uma requisição GET para obter os dados do usuário e mostre no Dashboard.
+5. Segurança e Considerações
+Armazenamento Seguro do Token:
+Embora o localStorage seja simples, ele não é seguro contra ataques de XSS (Cross-Site Scripting).
+Considere usar cookies HttpOnly se desejar uma opção mais segura para armazenar tokens em produção.
+Validade do Token:
+O token JWT tem um tempo de expiração (expiresIn). Certifique-se de que, ao acessar o Dashboard, você verifica se o token ainda é válido.
+Resumo das Tarefas
+Backend:
+
+Criar endpoint de login (POST) que gera um token JWT.
+Criar endpoint para obter informações do usuário (GET), protegido por token JWT.
+Frontend:
+
+Criar formulário de login e tratar requisição POST para login.
+Armazenar o token JWT no localStorage.
+Criar o Dashboard que verifica o token no localStorage e faz uma requisição GET para obter os dados do usuário.
+Lidar com erros de autenticação no frontend.
