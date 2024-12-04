@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TelaLogin from "./TelaLogin";
 import DashBoard from "./DashBoard";
 
-function Rotas() {
+function Rotas() {  
   return (
     <Router>
       <Routes>

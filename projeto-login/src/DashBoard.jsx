@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import './Styles/desktop/dashbord.css'
+import './Styles/desktop/dashboard.css'
+import './Styles/mobile/dashboard.css'
 
 function DashBoard() {
   const navigate = useNavigate();
@@ -38,12 +39,11 @@ function DashBoard() {
 
   return (
     <div>
-      <div className="main-container-dashboard">
+      <div className="main-container">
         <div className="span1-container">Seja bem vindo, de volta Sr: {userName}</div>
 
         <div className="span2-container">O que você deseja fazer hoje?
         </div>
-        <div className="main-container-opcoes"></div>
       </div>
     </div >
   )
