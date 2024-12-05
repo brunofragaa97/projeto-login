@@ -1,5 +1,4 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -10,15 +9,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1200px;
-  height: 500px;
+  width: 1300px;
+  height: 600px;
   border: solid 2px red;
   border-radius: 20px;
   
 }
 .animation-gif{
   background-image: url('/src/assets/background-login.gif');
-  background-size: 1200px 500px;
+  background-size: 1300px 600px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -56,6 +55,7 @@
   background-color: transparent;
   border: solid 2px red;
   border-radius: 10px;  
+  color: antiquewhite;
 }
 .error-message{
   color: yellow;
