@@ -13,17 +13,16 @@ function TelaLogin() {
   const navigate = useNavigate();
 
 
-  const loginClick = async (event) => { // Declara uma função assíncrona (função seta - arrow function). É usada porque ela lida com operações assíncronas (como chamadas à API) com `await`.
-    event.preventDefault(); // Evita o comportamento padrão do evento, que no caso de formulários seria recarregar a página ao enviar.
-
-    if (password.length < 6) { // Verifica se o comprimento da senha é menor que 6 caracteres.
-      return setErrorLogin("Senha não pode conter menos que 6 caracteres"); // Define uma mensagem de erro usando a função `setErrorLogin`. O `return` interrompe a execução da função.
-    } else { // Caso a senha tenha 6 ou mais caracteres, segue com a tentativa de login.
-      try { // Inicia um bloco `try`, que tenta executar o código e permite capturar erros no bloco `catch`.
-        const response = await fetch('http://localhost:5000/api/login', { // Faz uma requisição HTTP para a API usando `fetch`, que retorna uma promessa. `await` espera a resposta ser resolvida.
-          method: 'POST', // Define o método HTTP da requisição como POST, usado para enviar dados ao servidor.
-          headers: { 'Content-Type': 'application/json' }, // Adiciona cabeçalhos HTTP, indicando que o corpo da requisição será JSON.
-          body: JSON.stringify({ username, password }), // Converte um objeto JavaScript com `username` e `password` para uma string JSON, que será enviada no corpo da requisição.
+  const loginClick = async (event) => {
+    event.preventDefault();
+    if (password.length < 6) { 
+      return setErrorLogin("Senha não pode conter menos que 6 caracteres"); 
+    } else { 
+      try { 
+        const response = await fetch('http://localhost:5000/api/login', { 
+          method: 'POST', //
+          headers: { 'Content-Type': 'application/json' }, 
+          body: JSON.stringify({ username, password }), 
         });
 
         const servidor = await response.json();

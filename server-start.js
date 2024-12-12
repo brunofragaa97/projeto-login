@@ -1,15 +1,18 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require('express'); // Framework principal para o servidor
+const bodyParser = require('body-parser');// Middleware para processar o corpo das requisições
 const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');  // Biblioteca para manipular JWT
+const bcrypt = require('bcryptjs'); // Biblioteca para hashing de senhas
+require('dotenv').config({ path: 'secretjwt.env' }); // Carrega variáveis de ambiente do arquivo .env
+const morgan = require('morgan');
 
-const app = express();
+
+//CONFIGURAÇÕES DO SERVIDOR
 const PORT = 5000;
-const SECRET_KEY = 'seu-segredo-super-seguro';
-const REFRESH_SECRET_KEY = 'seu-refresh-token-seguro'; // Chave secreta para refresh token
-const TOKEN_EXPIRATION = '10m'; // Expiração do token principal
-const REFRESH_TOKEN_EXPIRATION = '1h'; // Expiração do refresh token
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+app.use(morgan('combined'));
 
 // Simulação de banco de dados (apenas para exemplo)
 const users = [
@@ -29,26 +32,32 @@ const users = [
   },
 ];
 
- const token = "ToKenDeDeUs"
+const token = "ToKenDeDeUs"
 
 
-app.use(cors());
-app.use(bodyParser.json());
 
 
-// Endpoint de login
-app.post('/api/login', (req, res) => {
+
+// Endpoint de login - Aqui Autentica o usuario
+app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
+  // Procura o usuário no "banco de dados"
+
   const user = users.find((u) => u.username === username);
   if (!user) {
     return res.status(404).json({ message: 'Usuário não encontrado' });
   }
 
+  // Compara a senha enviada com a senha armazenada
   const isPasswordValid = bcrypt.compareSync(password, user.password);
   if (!isPasswordValid) {
     return res.status(401).json({ message: 'Senha inválida' });
   }
-  
+
+  //SE ESTIVER TUDO OK COM O USUARIO/SENHA, GERA O TOKEN PARA O USUARIO
+  const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRATION
+  });
   res.json({
     message: 'Login bem-sucedido',
     token,
@@ -73,8 +82,9 @@ app.get('/api/validar-usuario', (req, res) => {
   // Verifica se o usuário foi encontrado
   if (user) {
     userNome = users['primeiroNome']
-    return res.json({ message: 'sim, o usuario foi encontrado corretamente' , 
-                      primeiroNome: user.primeiroNome
+    return res.json({
+      message: 'sim, o usuario foi encontrado corretamente',
+      primeiroNome: user.primeiroNome
     }); // Se o usuário for encontrado, responde com "sim"
   } else {
     return res.json({ message: 'não' }); // Se o usuário não for encontrado, responde com "não"
@@ -94,6 +104,8 @@ app.post('/api/logout', (req, res) => {
   res.json({ message: 'Logout bem-sucedido' });
 });
 
+
+//INICIA O SERVIDOR
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

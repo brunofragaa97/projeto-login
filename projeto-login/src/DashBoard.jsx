@@ -7,6 +7,7 @@ function DashBoard() {
   const navigate = useNavigate();
   const [usuarioLogado, setUsuarioLogado] = useState(localStorage.getItem('usuarioLogado'))  
   const [userName, setUserName] = useState("")
+  const token = localStorage.getItem("authToken")
  
 
   useEffect(() => {
@@ -16,8 +17,12 @@ function DashBoard() {
             method: 'GET',
 
           });
-
+          console.log(token)
           const servidor = await response.json();
+          if(response.ok && !token){
+            console.log ("token ainda validado", token)
+            navigate('/')
+          }
           if (response.ok) {
             console.log(servidor.message ," / " , {usuarioLogado})
             setUserName(servidor.primeiroNome)
@@ -34,6 +39,7 @@ function DashBoard() {
     serverConection()
   }, [])
 
+  
 
 
 
@@ -42,7 +48,7 @@ function DashBoard() {
       <div className="main-container">
         <div className="span1-container">Seja bem vindo, de volta Sr: {userName}</div>
 
-        <div className="span2-container">O que você deseja fazer hoje?
+        <div className="span2-container"><span>O que você deseja fazer hoje?</span>
         </div>
       </div>
     </div >
