@@ -73,24 +73,24 @@ app.get('/api/validar-usuario', (req, res) => {
 
   // Verifica se o 'username' foi fornecido na URL
   if (!username) {
-    return res.status(400).json({ message: 'Nome de usuário não fornecido2222' });
+    return res.status(400).json({ message: 'Nome de usuário não fornecido' }); // Retorna erro 400 se não for fornecido
   }
 
   // Simula a busca do usuário no banco de dados (você já possui a lista 'users' para isso)
-  const user = users.find((u) => u.username === username);
+  const user = users.find((u) => u.username === username); // Encontra o usuário pelo username
 
   // Verifica se o usuário foi encontrado
   if (user) {
-    userNome = users['primeiroNome']
+    // Se o usuário for encontrado, responde com sucesso
     return res.json({
-      message: 'sim, o usuario foi encontrado corretamente',
-      primeiroNome: user.primeiroNome
-    }); // Se o usuário for encontrado, responde com "sim"
+      message: 'USUARIO LOGADO',
+      primeiroNome: user.primeiroNome // Retorna o nome do usuário
+    });
   } else {
-    return res.json({ message: 'não' }); // Se o usuário não for encontrado, responde com "não"
+    // Se o usuário não for encontrado, responde com mensagem de erro
+    return res.status(404).json({ message: 'Usuário não encontrado' });
   }
 });
-
 
 // Endpoint para logout
 app.post('/api/logout', (req, res) => {

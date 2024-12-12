@@ -8,31 +8,30 @@ function DashBoard() {
   const [usuarioLogado, setUsuarioLogado] = useState(localStorage.getItem('usuarioLogado'))  
   const [userName, setUserName] = useState("")
   const token = localStorage.getItem("authToken")
+  const usuarioErrado = "bruno"
  
 
   useEffect(() => {
     const serverConection = async () => {
         try {
           const response = await fetch(`http://localhost:5000/api/validar-usuario?username=${usuarioLogado}`, {
-            method: 'GET',
-
+            method: 'GET'
           });
-          console.log(token)
+          
           const servidor = await response.json();
-          if(response.ok && !token){
-            console.log ("token ainda validado", token)
-            navigate('/')
+          if (!response.ok) {
+            console.log("Erro do servidor:", servidor.message);
+            console.log("CAIU NO IF");
+            navigate('/'); 
+          } else {
+            console.log(`${servidor.message}  /   ${usuarioLogado} / Seu token é  = ${token}`);
+            console.log("caiu no else, sucesso!");
           }
-          if (response.ok) {
-            console.log(servidor.message ," / " , {usuarioLogado})
-            setUserName(servidor.primeiroNome)
-            console.log(userName)
-          }
 
 
 
-        } catch {
-          console.log("Erro ao conectar no servidor ERRO CAIU NO CATCH")
+        } catch (error) {
+          console.log("Servidor indisponivel, Caiu no catch")
           navigate('/')
         }
     };
