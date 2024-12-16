@@ -8,7 +8,7 @@ function DashBoard() {
   const [usuarioLogado, setUsuarioLogado] = useState(
     localStorage.getItem("usuarioLogado")
   );
-  const [userName, setUserName] = useState("");
+  const [nomeUsuario, setNomeUsuario] = useState("LELEL");
   const token = localStorage.getItem("authToken")
   const usuarioErrado = "bruno";
 
@@ -32,10 +32,8 @@ function DashBoard() {
           console.log("CAIU NO IF");
           navigate("/");
         } else {
-          console.log(
-            `${servidor.message}  /   ${usuarioLogado} / Seu token é  = ${token}`
-          );
-          console.log("caiu no else, sucesso!");
+          console.log(`${servidor.message}/${servidor.primeiroNome} / caiu no Else`);
+          setNomeUsuario(servidor.primeiroNome)
         }
       } catch (error) {
         console.log("Servidor indisponivel, Caiu no catch");
@@ -49,7 +47,7 @@ function DashBoard() {
     <div>
       <div className="main-container">
         <div className="span1-container">
-          Seja bem vindo, de volta Sr: {userName}
+          Seja bem vindo, de volta Sr: {nomeUsuario}
         </div>
 
         <div className="span2-container">

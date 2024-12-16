@@ -20,7 +20,7 @@ const users = [
     id: 1,
     username: 'admin',
     password: bcrypt.hashSync('123456', 8), // Senha '123456' criptografada
-    primeiroNome: 'Admin',
+    primeiroNome: 'Admin Nome Teste',
     segundoNome: 'User',
   },
   {
@@ -63,57 +63,31 @@ app.post('/api/login', async (req, res) => {
   });
 });
 
-
-
-
 // Endpoint para validar se o usuário logado é o mesmo que o do dashboard
 app.get('/api/validar-usuario', (req, res) => {
   const { username } = req.query; // Recebe o 'username' via query string da URL
   const authHeader = req.headers.authorization;
-
-
   // Verifica se o 'username' foi fornecido na URL
-  if (!username && !authHeader) {
-    return res.status(400).json({ message: 'Nome de usuário ou token não fornecido, redirecionando!' }); // Retorna erro 400 se não for fornecido
-  }
   const token = authHeader.split(' ')[1];
-  console.log(token)
-
   if (!token) {
     return res.status(401).json({ message: 'Token invalido ou ausente' })
   }
-
-
   // Simula a busca do usuário no banco de dados (você já possui a lista 'users' para isso)
   const user = users.find((u) => u.username === username); // Encontra o usuário pelo username
-
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-
     if (user && decoded.username === username) {
       return res.json({
         message: 'USUARIO LOGADO',
         primeiroNome: user.primeiroNome,
       });
     } else {
-      return res.status(403).json({ message: "usuario invalido ou token nao autenticado"})
+      return res.status(403).json({ message: "usuario invalido ou token nao autenticado" })
     }
 
-  }catch (err) {
+  } catch (err) {
     // Trata erros na validação do token
     return res.status(403).json({ message: 'Token inválido ou expirado' });
-  }
-
-  // Verifica se o usuário foi encontrado
-  if (user) {
-    // Se o usuário for encontrado, responde com sucesso
-    return res.json({
-      message: 'USUARIO LOGADO',
-      primeiroNome: user.primeiroNome // Retorna o nome do usuário
-    });
-  } else {
-    // Se o usuário não for encontrado, responde com mensagem de erro
-    return res.status(404).json({ message: 'Usuário não encontrado' });
   }
 });
 

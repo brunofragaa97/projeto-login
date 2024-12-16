@@ -27,7 +27,7 @@ function TelaLogin() {
 
         const servidor = await response.json();
         if (response.ok) {
-          console.log(` ${servidor.message} / ${servidor.user} / ${servidor.token} /`);
+          console.log(` ${servidor.message}`);
           setErrorLogin(servidor.message)
           localStorage.setItem('authToken', servidor.token);
           localStorage.setItem('usuarioLogado', username);
