@@ -9,7 +9,7 @@ function DashBoard() {
     localStorage.getItem("usuarioLogado")
   );
   const [userName, setUserName] = useState("");
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem("authToken")
   const usuarioErrado = "bruno";
 
   useEffect(() => {
@@ -19,6 +19,9 @@ function DashBoard() {
           `http://localhost:5000/api/validar-usuario?username=${usuarioLogado}`,
           {
             method: "GET",
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
             
           }
         );
