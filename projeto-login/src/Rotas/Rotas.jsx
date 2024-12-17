@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import TelaLogin from "./TelaLogin";
-import DashBoard from "./DashBoard";
+import TelaLogin from "../Login/TelaLogin";
+import DashBoard from "../Login/DashBoard/DashBoard";
 
 function Rotas() {  
   return (

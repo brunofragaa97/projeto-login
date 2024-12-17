@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-import './Styles/desktop/TelaLogin.css'
-import './Styles/mobile/TelaLogin.css'
+import '../../Styles/Login-Dashboard/Login/desktop/TelaLogin.css'
+import '../../Styles/Login-Dashboard/Login/Mobile/TelaLogin.css'
 import { useNavigate } from "react-router-dom";
 
 

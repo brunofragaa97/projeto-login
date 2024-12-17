@@ -1,8 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
-import TelaLogin from './TelaLogin.jsx'
-import Rotas from "./Rotas";
+import '../Styles/index.css'
+import Rotas from "./Rotas/Rotas";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
