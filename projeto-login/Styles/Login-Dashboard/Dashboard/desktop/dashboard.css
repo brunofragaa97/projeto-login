@@ -1,24 +1,54 @@
-.main-container{
+/* Contêiner Principal */
+.main-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1160px;
-    height: 500px;
+    width: 93vw; /* Aumenta para 90% da largura da janela */
+    height: 86vh; /* Aumenta para 90% da altura da janela */
     background-color: black;
     border: 1px solid red;
     border-radius: 10px;
-}
-.grid-container {
+    margin: auto; /* Centraliza na tela */
+    box-sizing: border-box;
+  }
+  
+  /* Barra Superior */
+  .top-bar {
+    position: absolute;
+    top: 10%; /* Ajusta a barra para o topo dentro do contêiner */
+    text-align: center;
+    width: 100%; /* Faz a barra ocupar toda a largura */
+    color: white;
+    font-size: 1.8rem; /* Fonte maior para destaque */
+    z-index: 1;
+  }
+  
+  /* Grade Responsiva */
+  .grid-container {
     display: grid;
-    grid-template-columns: repeat(2, 150px); /* 2 colunas fixas */
-    grid-template-rows: repeat(2, 150px);    /* 2 linhas fixas */
-    gap: 20px; /* Espaço entre os quadrados menores */
-    
-    
-}
-.grid-item{
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+    grid-template-rows: repeat(2, 1fr); /* 2 linhas */
+    gap: 30px; /* Aumenta o espaço entre os quadrados */
+    width: 30%; /* Aumenta a largura da grade */
+    height: 60%; /* Aumenta a altura da grade */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-content: center; /* Centraliza verticalmente */
+  }
+  
+  /* Estilo dos Itens */
+  .grid-item {
     background-color: white;
     border: 1px solid red;
     border-radius: 10px;
-    color:black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    width: 100%; /* Faz o item ocupar todo o espaço da célula */
+    height: 100%; /* Faz o item ocupar todo o espaço da célula */
+  }
+.grid-item img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
 }

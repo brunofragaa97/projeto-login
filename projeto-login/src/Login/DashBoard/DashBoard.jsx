@@ -44,10 +44,11 @@ function DashBoard() {
   }, []);
 
   return (
-    <div>
+    <div className="main-container">
       <div className="main-container">
+        <div className="top-bar">O que deseja fazer Hoje {nomeUsuario}?</div>
         <div className="grid-container">
-          <div className="grid-item">teste</div>
+          <div className="grid-item"><img src="src/assets/imgteste1.png"></img></div>
           <div className="grid-item">teste</div>
           <div className="grid-item">teste</div>
           <div className="grid-item">teste</div>
