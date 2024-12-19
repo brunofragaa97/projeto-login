@@ -8,9 +8,8 @@ function DashBoard() {
   const [usuarioLogado, setUsuarioLogado] = useState(
     localStorage.getItem("usuarioLogado")
   );
-  const [nomeUsuario, setNomeUsuario] = useState("LELEL");
-  const token = localStorage.getItem("authToken")
-  const usuarioErrado = "bruno";
+  const [nomeUsuario, setNomeUsuario] = useState("");
+  const token = localStorage.getItem("authToken");
 
   useEffect(() => {
     const serverConection = async () => {
@@ -20,9 +19,8 @@ function DashBoard() {
           {
             method: "GET",
             headers: {
-              'Authorization': `Bearer ${token}`
-            }
-            
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
 
@@ -32,8 +30,10 @@ function DashBoard() {
           console.log("CAIU NO IF");
           navigate("/");
         } else {
-          console.log(`${servidor.message}/${servidor.primeiroNome} / caiu no Else`);
-          setNomeUsuario(servidor.primeiroNome)
+          console.log(
+            `${servidor.message}/${servidor.primeiroNome} / caiu no Else`
+          );
+          setNomeUsuario(servidor.primeiroNome);
         }
       } catch (error) {
         console.log("Servidor indisponivel, Caiu no catch");
@@ -46,12 +46,11 @@ function DashBoard() {
   return (
     <div>
       <div className="main-container">
-        <div className="span1-container">
-          Seja bem vindo, de volta Sr: {nomeUsuario}
-        </div>
-
-        <div className="span2-container">
-          <span>O que você deseja fazer hoje?</span>
+        <div className="grid-container">
+          <div className="grid-item">teste</div>
+          <div className="grid-item">teste</div>
+          <div className="grid-item">teste</div>
+          <div className="grid-item">teste</div>
         </div>
       </div>
     </div>

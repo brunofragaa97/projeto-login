@@ -1,14 +1,24 @@
-#root {
-    display: flex;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-    
-  }
 .main-container{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1160px;
+    height: 500px;
+    background-color: black;
+    border: 1px solid red;
+    border-radius: 10px;
 }
-.span2-container{
-    display: flex;
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 150px); /* 2 colunas fixas */
+    grid-template-rows: repeat(2, 150px);    /* 2 linhas fixas */
+    gap: 20px; /* Espaço entre os quadrados menores */
+    
+    
+}
+.grid-item{
+    background-color: white;
+    border: 1px solid red;
+    border-radius: 10px;
+    color:black;
 }

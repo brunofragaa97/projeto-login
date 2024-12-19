@@ -49,7 +49,7 @@ function TelaLogin() {
 
   return (
     <>
-      <div className='main-container'>
+      <div className='main-container-login'>
         <div className='animation-gif'>
           <div className='container-login'>
             <div className='container-login-caixa'>
