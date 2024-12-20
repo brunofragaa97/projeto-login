@@ -1,4 +1,5 @@
 import "../../../Styles/Login-Dashboard/Dashboard/Desktop/modal.css"
+import ApiFilmes from "./ApiFilmes";
 
 const Modal = ({ isOpen, onClose, children }) => {
     if(!isOpen) return null;
@@ -10,7 +11,12 @@ const Modal = ({ isOpen, onClose, children }) => {
          onClick={onClose}
          
          >
-        <div className="container-modal" onClick={(e) => e.stopPropagation()}>Teste de conteudo</div>
+        <div className="container-modal" onClick={(e) => e.stopPropagation()}>Teste de conteudo
+            <div>
+            {children}
+            </div>
+        </div>
+        
 
 
 

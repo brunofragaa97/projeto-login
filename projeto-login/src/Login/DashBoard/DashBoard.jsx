@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import Modal from "./Modal"
 import "../../../Styles/Login-Dashboard/Dashboard/Desktop/dashboard.css";
 import "../../../Styles/Login-Dashboard/Dashboard/Mobile/dashboard.css";
+import ApiFilmes from "./ApiFilmes";
 
 function DashBoard() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function DashBoard() {
   );
   const [nomeUsuario, setNomeUsuario] = useState("");
   const token = localStorage.getItem("authToken");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeModalContent, setActiveModalContent] = useState(null)
 
   //        CONEXÃO COM O SERVIDOR
   useEffect(() => {
@@ -45,14 +46,12 @@ function DashBoard() {
     serverConection();
   }, []);
 
-  //             MODAL
-  const openModal = () => {
-    setIsModalOpen(true);
-    console.log("modal Aberto")
-    
+  //-------------------MODAL--------------------------
+  const openModal = (index) => {
+    setActiveModalContent(index);
   };
   const closeModal = () => {
-    setIsModalOpen(false);
+    setActiveModalContent(null);
   };
 
   return (
@@ -60,18 +59,56 @@ function DashBoard() {
       <div className="main-container">
         <div className="top-bar">O que deseja fazer Hoje {nomeUsuario}?</div>
         <div className="grid-container">
+        <div className="grid-item">
+          
+          <img 
+            src="src/assets/apiimg.jpg" 
+            onClick={() => openModal(1)}>
+          </img>
+          <Modal isOpen={activeModalContent === 1} onClose={closeModal}>
+            <h1> Este conteudo vai dentro do modal </h1>
+            <p>Esse é o conteúdo 001 dentro do modal.</p>
+          </Modal>
+            
+        </div>
+        <div className="grid-item">
+          
+            <img 
+              src="src/assets/apiimg.jpg"
+              onClick={() => openModal(2)}>
+            </img>
+            <Modal isOpen={activeModalContent === 2} onClose={closeModal}>
+              <h1> Este conteudo vai dentro do modal</h1>
+              <p>Esse é o conteúdo 002 dentro do modal.</p>
+            </Modal>
+              
+          </div>
           <div className="grid-item">
           
             <img 
-              src="src/assets/imgteste1.png" 
-              onClick={openModal}>
+              src="src/assets/apiimg.jpg"
+              onClick={() => openModal(3)}>
             </img>
-            <Modal isOpen={isModalOpen} onClose={closeModal}></Modal>
+            <Modal isOpen={activeModalContent === 3} onClose={closeModal}>
+              <div>
+                <ApiFilmes />
+              </div>
+            </Modal>
               
           </div>
-          <div className="grid-item">teste</div>
-          <div className="grid-item">teste</div>
-          <div className="grid-item">teste</div>
+          <div className="grid-item">
+          
+            <img 
+              src="src/assets/apiimg.jpg" 
+              onClick={() => openModal(4)}>
+            </img>
+            <Modal isOpen={activeModalContent === 4} onClose={closeModal}>
+              <h1> Este conteudo vai dentro do modal</h1>
+              <p>Esse é o conteúdo 004 dentro do modal.</p>
+            </Modal>
+              
+          </div>
+
         </div>
       </div>
     </div>

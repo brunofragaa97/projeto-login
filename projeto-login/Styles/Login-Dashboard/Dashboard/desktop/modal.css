@@ -8,7 +8,7 @@
     display: flex; /* Centraliza o conteúdo */
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Coloca o modal acima de outros elementos */
+    z-index: 1; /* Coloca o modal acima de outros elementos */
     
   }
 

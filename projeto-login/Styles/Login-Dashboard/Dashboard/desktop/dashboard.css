@@ -44,8 +44,8 @@
     justify-content: center;
     align-items: center;
     font-size: 1rem;
-    width: 100%; /* Faz o item ocupar todo o espaço da célula */
-    height: 100%; /* Faz o item ocupar todo o espaço da célula */
+    width: 120px; /* Faz o item ocupar todo o espaço da célula */
+    height: 120px; /* Faz o item ocupar todo o espaço da célula */
   }
 .grid-item img{
     width: 100%;
